@@ -19,10 +19,9 @@ namespace Krakout_11A {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
-        int xSeb = 5;
-        int ySeb = 5;
-        int labdaSzelesseg = 30;
-        int utoSzelesseg = 100;
+        double xSeb = 5;
+        double ySeb = 5;
+        int pontok = 0;
         public MainWindow() {
             InitializeComponent();
             var ido = new DispatcherTimer();
@@ -33,16 +32,33 @@ namespace Krakout_11A {
 
         private void idoLepes(object sender, EventArgs e) {
             // 1. balról és jobbról forduljon vissza
-            if (Canvas.GetLeft(labda) > 950 || Canvas.GetLeft(labda) < 0) 
+            if (Canvas.GetLeft(labda) > 950 || Canvas.GetLeft(labda) < 0)
                 xSeb = xSeb * -1;
             // 2. fentről és lentről is forduljon vissza
             if (Canvas.GetTop(labda) > 560 || Canvas.GetTop(labda) < 0)
                 ySeb = ySeb * -1;
-            // mozgatás
+            // 3. ütőmozgatás, de úgy, hogy ne menjen ki az ütő a szélén
+            var egerPozicio = Mouse.GetPosition(jatekter).X;
+            if (egerPozicio > 0 && egerPozicio < 950) {
+                // ütő mozgatás
+                Canvas.SetLeft(uto, egerPozicio);
+            }
+            // 4. ütközésvizsgálat a labda és az ütő között
+            var utoX = Canvas.GetLeft(uto);
+            var utoY = Canvas.GetTop(uto);
+            var labdaX = Canvas.GetLeft(labda);
+            var labdaY = Canvas.GetTop(labda);
+            if (labdaX + labda.Width > utoX
+                && labdaX < utoX + uto.Width
+                && labdaY + labda.Height > utoY
+                && labdaY < utoY + uto.Height
+                ) {
+                ySeb *= -1.3;
+                pontszam.Content = ++pontok;
+            }
+            // labda mozgatás
             Canvas.SetLeft(labda, Canvas.GetLeft(labda) + xSeb);
             Canvas.SetTop(labda, Canvas.GetTop(labda) + ySeb);
-            // ütő mozgatás
-
         }
     }
 }
