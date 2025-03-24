@@ -53,9 +53,15 @@ namespace Krakout_11A {
             // 1. balról és jobbról forduljon vissza
             if (Canvas.GetLeft(labda) > 950 || Canvas.GetLeft(labda) < 0)
                 xSeb = xSeb * -1;
-            // 2. fentről és lentről is forduljon vissza
-            if (Canvas.GetTop(labda) > 560 || Canvas.GetTop(labda) < 0)
+            // 2. fentről forduljon vissza
+            if (Canvas.GetTop(labda) < 0)
                 ySeb = ySeb * -1;
+            // 2.1 alul menjen ki és rakja vissza az ütő fölé a labdát
+            if (Canvas.GetTop(labda) > 600) {
+                Canvas.SetLeft(labda, 450);
+                Canvas.SetTop(labda, 200);
+                ySeb = 5;
+            }
             // 3. ütőmozgatás, de úgy, hogy ne menjen ki az ütő a szélén
             var egerPozicio = Mouse.GetPosition(jatekter).X;
             if (egerPozicio > 0 && egerPozicio < 950) {
@@ -90,7 +96,7 @@ namespace Krakout_11A {
                     break;
                 }
             }
-            // B
+            // B verzió
             //for (int j = 0; j < sorokSzama; j++) {
             //    for (int i = 0; i < teglakSzamaSoronkent; i++) {
             //        Image tegla;
