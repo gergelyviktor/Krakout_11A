@@ -53,9 +53,15 @@ namespace Krakout_11A {
             // 1. balról és jobbról forduljon vissza
             if (Canvas.GetLeft(labda) > 950 || Canvas.GetLeft(labda) < 0)
                 xSeb = xSeb * -1;
-            // 2. fentről és lentről is forduljon vissza
-            if (Canvas.GetTop(labda) > 560 || Canvas.GetTop(labda) < 0)
+            // 2. fentről forduljon vissza
+            if (Canvas.GetTop(labda) < 0)
                 ySeb = ySeb * -1;
+            // 2.1 alul menjen ki és rakja vissza az ütő fölé a labdát
+            if (Canvas.GetTop(labda) > 600) {
+                Canvas.SetLeft(labda, 450);
+                Canvas.SetTop(labda, 200);
+                ySeb = 5;
+            }
             // 3. ütőmozgatás, de úgy, hogy ne menjen ki az ütő a szélén
             var egerPozicio = Mouse.GetPosition(jatekter).X;
             if (egerPozicio > 0 && egerPozicio < 950) {
@@ -90,28 +96,7 @@ namespace Krakout_11A {
                     break;
                 }
             }
-            // B
-            //for (int j = 0; j < sorokSzama; j++) {
-            //    for (int i = 0; i < teglakSzamaSoronkent; i++) {
-            //        Image tegla;
-            //        var aktualisElem = jatekter.Children[j * teglakSzamaSoronkent + i];
-            //        if (aktualisElem is Image) {
-            //            tegla = (Image)aktualisElem;
-            //            var teglaX = Canvas.GetLeft(tegla);
-            //            var teglaY = Canvas.GetTop(tegla);
-            //            if (labdaX + labda.Width > teglaX
-            //            && labdaX < teglaX + tegla.Width
-            //            && labdaY + labda.Height > teglaY
-            //            && labdaY < teglaY + tegla.Height
-            //            ) {
-            //                ySeb *= -1;
-            //                jatekter.Children.Remove(tegla);
-            //                pontszam.Content = ++pontok;
-            //                break;
-            //            }
-            //        }
-            //    }
-            //}
+
             // labda mozgatás
             Canvas.SetLeft(labda, Canvas.GetLeft(labda) + xSeb);
             Canvas.SetTop(labda, Canvas.GetTop(labda) + ySeb);
