@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Windows.Controls;
 
 namespace Krakout_11A {
     /// <summary>
@@ -22,8 +23,26 @@ namespace Krakout_11A {
         double xSeb = 5;
         double ySeb = 5;
         int pontok = 0;
+        int teglakSzamaSoronkent = 10;
+        int sorokSzama = 5;
         public MainWindow() {
             InitializeComponent();
+            // sorok megjelenítése
+            for (int j = 0; j < sorokSzama; j++) {
+                // egy sornyi tégla
+                for (int i = 0; i < teglakSzamaSoronkent; i++) {
+                    var tegla = new Image();
+                    tegla.Source = new BitmapImage(new Uri("/kepek/tegla.jpg", UriKind.Relative));
+                    tegla.Width = 90;
+                    tegla.Height = 20;
+                    tegla.Stretch = Stretch.Fill;
+                    jatekter.Children.Add(tegla);
+                    Canvas.SetLeft(tegla, i * 100);
+                    Canvas.SetTop(tegla, j * 30);
+                }
+            }
+
+            //
             var ido = new DispatcherTimer();
             ido.Interval = TimeSpan.FromMilliseconds(1);
             ido.Tick += idoLepes;
