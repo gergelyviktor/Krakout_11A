@@ -75,6 +75,43 @@ namespace Krakout_11A {
                 ySeb *= -1.3;
                 pontszam.Content = ++pontok;
             }
+            // 5. ütközésvizsgálat a labda és a tégla között
+            foreach (var tegla in jatekter.Children.OfType<Image>()) {
+                var teglaX = Canvas.GetLeft(tegla);
+                var teglaY = Canvas.GetTop(tegla);
+                if (labdaX + labda.Width > teglaX
+                    && labdaX < teglaX + tegla.Width
+                    && labdaY + labda.Height > teglaY
+                    && labdaY < teglaY + tegla.Height
+                    ) {
+                    ySeb *= -1;
+                    jatekter.Children.Remove(tegla);
+                    pontszam.Content = ++pontok;
+                    break;
+                }
+            }
+            // B
+            //for (int j = 0; j < sorokSzama; j++) {
+            //    for (int i = 0; i < teglakSzamaSoronkent; i++) {
+            //        Image tegla;
+            //        var aktualisElem = jatekter.Children[j * teglakSzamaSoronkent + i];
+            //        if (aktualisElem is Image) {
+            //            tegla = (Image)aktualisElem;
+            //            var teglaX = Canvas.GetLeft(tegla);
+            //            var teglaY = Canvas.GetTop(tegla);
+            //            if (labdaX + labda.Width > teglaX
+            //            && labdaX < teglaX + tegla.Width
+            //            && labdaY + labda.Height > teglaY
+            //            && labdaY < teglaY + tegla.Height
+            //            ) {
+            //                ySeb *= -1;
+            //                jatekter.Children.Remove(tegla);
+            //                pontszam.Content = ++pontok;
+            //                break;
+            //            }
+            //        }
+            //    }
+            //}
             // labda mozgatás
             Canvas.SetLeft(labda, Canvas.GetLeft(labda) + xSeb);
             Canvas.SetTop(labda, Canvas.GetTop(labda) + ySeb);
