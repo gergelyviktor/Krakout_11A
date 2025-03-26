@@ -96,7 +96,6 @@ namespace Krakout_11A {
                     break;
                 }
             }
-
             // labda mozgatás
             Canvas.SetLeft(labda, Canvas.GetLeft(labda) + xSeb);
             Canvas.SetTop(labda, Canvas.GetTop(labda) + ySeb);
