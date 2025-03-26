@@ -96,28 +96,6 @@ namespace Krakout_11A {
                     break;
                 }
             }
-            // B verzió
-            //for (int j = 0; j < sorokSzama; j++) {
-            //    for (int i = 0; i < teglakSzamaSoronkent; i++) {
-            //        Image tegla;
-            //        var aktualisElem = jatekter.Children[j * teglakSzamaSoronkent + i];
-            //        if (aktualisElem is Image) {
-            //            tegla = (Image)aktualisElem;
-            //            var teglaX = Canvas.GetLeft(tegla);
-            //            var teglaY = Canvas.GetTop(tegla);
-            //            if (labdaX + labda.Width > teglaX
-            //            && labdaX < teglaX + tegla.Width
-            //            && labdaY + labda.Height > teglaY
-            //            && labdaY < teglaY + tegla.Height
-            //            ) {
-            //                ySeb *= -1;
-            //                jatekter.Children.Remove(tegla);
-            //                pontszam.Content = ++pontok;
-            //                break;
-            //            }
-            //        }
-            //    }
-            //}
             // labda mozgatás
             Canvas.SetLeft(labda, Canvas.GetLeft(labda) + xSeb);
             Canvas.SetTop(labda, Canvas.GetTop(labda) + ySeb);
